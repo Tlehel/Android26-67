@@ -63,7 +63,33 @@ fun main() {
     val averageLength = daysOfWeek.map { it.length }.average()
     println("Napok átlagos hossza: $averageLength")
 
-    
+    val mutableDays = daysOfWeek.toMutableList()
+    mutableDays.removeAll { it.contains("n") }
+    println(mutableDays)
+
+    for ((index, day) in mutableDays.withIndex()) {
+        println("Item at $index is $day")
+    }
+
+    mutableDays.sort()
+    println(mutableDays)
+
+    val randomArray = Array(10) { (0..100).random() }
+
+    println("--- A generált tömb elemei ---")
+    randomArray.forEach { println(it) }
+
+    println("\n--- Növekvő sorrendben ---")
+    println(randomArray.sorted())
+
+    val hasEven = randomArray.any { it % 2 == 0 }
+    println("\nVan benne páros szám? $hasEven")
+
+    val allEven = randomArray.all { it % 2 == 0 }
+    println("Minden szám páros? $allEven")
+
+    val average = randomArray.average()
+    println("\nA számok átlaga: $average")
 }
 
 fun isPrime(number: Int): Boolean {
