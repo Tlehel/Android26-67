@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.progr3ss.model.AuthResponse
-import com.example.progr3ss.model.SignUpResponse
 import com.example.progr3ss.repository.AuthRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -41,17 +40,16 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Register
-    private val _registerResult = MutableLiveData<Result<SignUpResponse>>()
-    val registerResult: LiveData<Result<SignUpResponse>> = _registerResult
+    private val _registerResult = MutableLiveData<Result<AuthResponse>>()
+    val registerResult: LiveData<Result<AuthResponse>> = _registerResult
 
     fun register(username: String, email: String, password: String) {
         viewModelScope.launch {
             try {
                 val response = repository.register(username, email, password)
-                if (response.isSuccessful) {
-                    _registerResult.postValue(
-                        Result.success(response.body() ?: SignUpResponse(null))
-                    )
+                val body = response.body()
+                if (response.isSuccessful && body != null) {
+                    _registerResult.postValue(Result.success(body))
                 } else {
                     val details = response.errorBody()?.string()
                     _registerResult.postValue(

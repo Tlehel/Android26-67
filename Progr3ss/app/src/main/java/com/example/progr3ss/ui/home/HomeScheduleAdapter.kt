@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.progr3ss.R
 import com.example.progr3ss.databinding.ItemHomeScheduleBinding
 import com.example.progr3ss.model.ScheduleResponse
+import com.example.progr3ss.utils.CategoryIcons
 import java.time.format.DateTimeFormatter
 
-class HomeScheduleAdapter :
-    ListAdapter<ScheduleResponse, HomeScheduleAdapter.ViewHolder>(DiffCallback()) {
+class HomeScheduleAdapter(
+    private val onItemClick: (ScheduleResponse) -> Unit
+) : ListAdapter<ScheduleResponse, HomeScheduleAdapter.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHomeScheduleBinding.inflate(
@@ -24,7 +26,9 @@ class HomeScheduleAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item)
+        holder.itemView.setOnClickListener { onItemClick(item) }
     }
 
     class ViewHolder(private val binding: ItemHomeScheduleBinding) :
@@ -68,19 +72,18 @@ class HomeScheduleAdapter :
                 binding.tvNotes.visibility = View.VISIBLE
             }
 
-            // Ikon a kategória alapján
-            binding.ivIcon.setImageResource(iconFor(categoryName))
+            // Kategória ikon
+            binding.ivIcon.setImageResource(CategoryIcons.iconFor(categoryName))
+
+            // Státusz ikon: Completed / Skipped / Planned (minden más)
+            binding.ivStatus.setImageResource(statusIcon(item.status))
+            binding.ivStatus.contentDescription = item.status ?: "Planned"
         }
 
-        private fun iconFor(categoryName: String?): Int = when (categoryName) {
-            "Exercise" -> R.drawable.ic_exercise
-            "Reading" -> R.drawable.ic_reading
-            "Study" -> R.drawable.ic_study
-            "Hydration" -> R.drawable.ic_hydration
-            "Writing" -> R.drawable.ic_writing
-            "Running" -> R.drawable.ic_running
-            "Other" -> R.drawable.ic_other
-            else -> R.drawable.ic_add
+        private fun statusIcon(status: String?): Int = when (status) {
+            "Completed" -> R.drawable.ic_status_completed
+            "Skipped" -> R.drawable.ic_status_skipped
+            else -> R.drawable.ic_status_planned
         }
     }
 

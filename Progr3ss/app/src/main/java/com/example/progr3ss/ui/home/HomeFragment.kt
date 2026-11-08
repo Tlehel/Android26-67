@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.progr3ss.R
 import com.example.progr3ss.databinding.FragmentHomeBinding
 import com.example.progr3ss.repository.ScheduleRepository
 import java.time.LocalDate
@@ -57,7 +60,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupUi() {
-        adapter = HomeScheduleAdapter()
+        adapter = HomeScheduleAdapter { schedule ->
+            findNavController().navigate(
+                R.id.action_homeFragment_to_scheduleDetailsFragment,
+                bundleOf("scheduleId" to schedule.id)
+            )
+        }
         binding.rvSchedules.layoutManager = LinearLayoutManager(requireContext())
         binding.rvSchedules.adapter = adapter
         binding.rvSchedules.addItemDecoration(
@@ -67,6 +75,10 @@ class HomeFragment : Fragment() {
         // A mai nap ütemezései (YYYY-MM-DD)
         val today = LocalDate.now().toString()
         viewModel.getScheduleByDay(today)
+
+        binding.fabAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_createScheduleFragment)
+        }
     }
 
     private fun setupObservers() {

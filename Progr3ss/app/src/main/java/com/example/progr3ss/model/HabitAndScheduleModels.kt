@@ -48,9 +48,22 @@ data class ScheduleResponse(
 
 data class ProgressResponseDto(
     val id: Long? = null,
-    val userId: Long? = null,
-    val progressValue: Double? = null,
-    val updatedAt: String? = null
+    val date: String? = null,
+    @SerializedName("logged_time")
+    val loggedTime: Double? = null,
+    val notes: String? = null,
+    @SerializedName("is_completed")
+    val isCompleted: Boolean? = null
+)
+
+data class CreateProgressRequest(
+    val scheduleId: Long,
+    val date: String,
+    @SerializedName("logged_time")
+    val loggedTime: Int? = null,
+    val notes: String? = null,
+    @SerializedName("is_completed")
+    val isCompleted: Boolean? = null
 )
 
 data class ParticipantDto(
@@ -58,4 +71,49 @@ data class ParticipantDto(
     val name: String? = null,
     val email: String? = null,
     val profileImage: String? = null
+)
+
+data class CreateHabitRequest(
+    val name: String,
+    val description: String?,
+    val categoryId: Long,
+    val goal: String
+)
+
+data class CreateCustomScheduleRequest(
+    val habitId: Long,
+    val date: String,
+    @SerializedName("start_time")
+    val startTime: String,
+    @SerializedName("end_time")
+    val endTime: String? = null,
+    @SerializedName("duration_minutes")
+    val durationMinutes: Int? = null,
+    @SerializedName("is_custom")
+    val isCustom: Boolean = true
+)
+
+data class CreateRecurringScheduleRequest(
+    val habitId: Long,
+    @SerializedName("start_time")
+    val startTime: String,
+    @SerializedName("end_time")
+    val endTime: String? = null,
+    @SerializedName("duration_minutes")
+    val durationMinutes: Int? = null,
+    val repeatPattern: String,
+    @SerializedName("is_custom")
+    val isCustom: Boolean = true
+)
+
+data class UpdateScheduleRequest(
+    @SerializedName("start_time")
+    val startTime: String? = null,
+    @SerializedName("end_time")
+    val endTime: String? = null,
+    @SerializedName("duration_minutes")
+    val durationMinutes: Int? = null,
+    val status: String? = null,
+    val date: String? = null,
+    val notes: String? = null
 )

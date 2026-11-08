@@ -60,8 +60,3 @@ data class Tokens(
     @SerializedName("refreshToken")
     val refreshToken: String
 )
-
-data class SignUpResponse(
-    @SerializedName("message")
-    val message: String?
-)

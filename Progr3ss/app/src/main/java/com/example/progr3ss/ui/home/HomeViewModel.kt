@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.progr3ss.model.ScheduleResponse
 import com.example.progr3ss.repository.ScheduleRepository
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 class HomeViewModel(private val repository: ScheduleRepository) : ViewModel() {
 
@@ -24,7 +25,7 @@ class HomeViewModel(private val repository: ScheduleRepository) : ViewModel() {
             _isLoading.value = true
             try {
                 val response = repository.getScheduleByDay(day)
-                _schedules.value = response
+                _schedules.value = response.sortedBy { it.startTime ?: LocalDateTime.MAX }
                 _errorMessage.value = null
             } catch (e: Exception) {
                 _errorMessage.value = e.message ?: "Failed to load schedules"

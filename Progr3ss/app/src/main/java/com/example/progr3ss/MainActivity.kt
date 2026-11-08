@@ -3,12 +3,10 @@ package com.example.progr3ss
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.progr3ss.databinding.ActivityMainBinding
@@ -17,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +27,9 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Felső szintű úticélok az ActionBarhoz
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.profileFragment)
+        // Felső szintű úticélok: ezeken nem jelenik meg a vissza nyíl
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.loginFragment, R.id.homeFragment, R.id.profileFragment)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -47,6 +46,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         Log.d(TAG, "onCreate: MainActivity created.")
+    }
+
+    // A felső sávban lévő vissza nyíl kezelése
+    override fun onSupportNavigateUp(): Boolean {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onStart() {

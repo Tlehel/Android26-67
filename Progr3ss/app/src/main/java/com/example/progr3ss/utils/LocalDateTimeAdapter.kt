@@ -8,6 +8,8 @@ import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
 import java.lang.reflect.Type
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class LocalDateTimeAdapter : JsonDeserializer<LocalDateTime>, JsonSerializer<LocalDateTime> {
@@ -19,9 +21,13 @@ class LocalDateTimeAdapter : JsonDeserializer<LocalDateTime>, JsonSerializer<Loc
     ): LocalDateTime {
         val dateString = json.asString
         return try {
-            LocalDateTime.parse(dateString, DateTimeFormatter.ISO_DATE_TIME)
+            // UTC idő átváltása a telefon időzónájára
+            OffsetDateTime.parse(dateString)
+                .atZoneSameInstant(ZoneId.systemDefault())
+                .toLocalDateTime()
         } catch (e: Exception) {
-            LocalDateTime.parse(dateString.replace("Z", ""))
+            // Ha nincs időzóna a szövegben
+            LocalDateTime.parse(dateString.removeSuffix("Z"))
         }
     }
 

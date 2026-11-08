@@ -22,7 +22,13 @@
         android:id="@+id/registerFragment"
         android:name="com.example.progr3ss.ui.auth.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
@@ -32,6 +38,12 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_scheduleDetailsFragment"
+            app:destination="@id/scheduleDetailsFragment" />
     </fragment>
 
     <fragment
@@ -42,6 +54,41 @@
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_addHabitFragment"
+            app:destination="@id/addHabitFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/addHabitFragment"
+        android:name="com.example.progr3ss.ui.habit.AddHabitFragment"
+        android:label="Add habit"
+        tools:layout="@layout/fragment_add_habit" />
+
+    <fragment
+        android:id="@+id/createScheduleFragment"
+        android:name="com.example.progr3ss.ui.schedule.CreateScheduleFragment"
+        android:label="Create schedule"
+        tools:layout="@layout/fragment_create_schedule">
+        <action
+            android:id="@+id/action_createScheduleFragment_to_addHabitFragment"
+            app:destination="@id/addHabitFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleDetailsFragment"
+        android:name="com.example.progr3ss.ui.schedule.ScheduleDetailsFragment"
+        android:label="Schedule details"
+        tools:layout="@layout/fragment_schedule_details">
+        <action
+            android:id="@+id/action_scheduleDetailsFragment_to_editScheduleFragment"
+            app:destination="@id/editScheduleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editScheduleFragment"
+        android:name="com.example.progr3ss.ui.schedule.EditScheduleFragment"
+        android:label="Edit schedule"
+        tools:layout="@layout/fragment_edit_schedule" />
 
 </navigation>
