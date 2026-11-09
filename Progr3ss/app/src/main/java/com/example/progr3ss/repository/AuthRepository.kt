@@ -18,4 +18,6 @@ class AuthRepository(context: Context) {
             email = MultipartBody.Part.createFormData("email", email),
             password = MultipartBody.Part.createFormData("password", password)
         )
+
+    suspend fun refresh(refreshToken: String) = api.refreshTokens("Bearer $refreshToken")
 }

@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
+// A kezdő képernyő attól függ, sikerült-e az automatikus belépés
+        val startAtHome = intent.getBooleanExtra("startAtHome", false)
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+        navGraph.setStartDestination(if (startAtHome) R.id.homeFragment else R.id.loginFragment)
+        navController.graph = navGraph
+
         // Felső szintű úticélok: ezeken nem jelenik meg a vissza nyíl
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.loginFragment, R.id.homeFragment, R.id.profileFragment)

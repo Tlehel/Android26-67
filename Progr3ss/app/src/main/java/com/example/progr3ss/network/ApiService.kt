@@ -8,7 +8,10 @@ import com.example.progr3ss.model.CreateProgressRequest
 import com.example.progr3ss.model.CreateRecurringScheduleRequest
 import com.example.progr3ss.model.HabitCategory
 import com.example.progr3ss.model.HabitResponse
+import com.example.progr3ss.model.Profile
 import com.example.progr3ss.model.ScheduleResponse
+import com.example.progr3ss.model.Tokens
+import com.example.progr3ss.model.UpdateProfileRequest
 import com.example.progr3ss.model.UpdateScheduleRequest
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -16,6 +19,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -68,4 +72,23 @@ interface ApiService {
 
     @DELETE("schedule/{id}")
     suspend fun deleteSchedule(@Path("id") id: Long): Response<Unit>
+
+    @GET("profile")
+    suspend fun getProfile(): Profile
+
+    @PATCH("profile")
+    suspend fun updateProfile(@Body request: UpdateProfileRequest): Response<ResponseBody>
+
+    @Multipart
+    @POST("profile/upload-profile-image")
+    suspend fun uploadProfileImage(@Part profileImage: MultipartBody.Part): Response<ResponseBody>
+
+    @GET("habit/user/{userId}")
+    suspend fun getHabitsByUser(@Path("userId") userId: Long): List<HabitResponse>
+
+    @POST("auth/local/logout")
+    suspend fun logout(): Response<ResponseBody>
+
+    @POST("auth/local/refresh")
+    suspend fun refreshTokens(@Header("Authorization") refreshToken: String): Response<Tokens>
 }

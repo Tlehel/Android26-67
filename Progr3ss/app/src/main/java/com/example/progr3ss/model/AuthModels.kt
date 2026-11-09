@@ -60,3 +60,7 @@ data class Tokens(
     @SerializedName("refreshToken")
     val refreshToken: String
 )
+
+data class UpdateProfileRequest(
+    val username: String
+)

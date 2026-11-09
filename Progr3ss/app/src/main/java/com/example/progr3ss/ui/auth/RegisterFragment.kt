@@ -58,8 +58,10 @@ class RegisterFragment : Fragment() {
         viewModel.registerResult.observe(viewLifecycleOwner) { result ->
             Log.d("RegisterFragment", "registerResult: $result")
             result.onSuccess { authResponse ->
-                SessionManager(requireContext().applicationContext)
-                    .saveAuthToken(authResponse.tokens.accessToken)
+                val session = SessionManager(requireContext().applicationContext)
+                session.saveAuthToken(authResponse.tokens.accessToken)
+                session.saveRefreshToken(authResponse.tokens.refreshToken)
+                session.saveUserId(authResponse.user.id.toLong())
 
                 Toast.makeText(
                     requireContext(),

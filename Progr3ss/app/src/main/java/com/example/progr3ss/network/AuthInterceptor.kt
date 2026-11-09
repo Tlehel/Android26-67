@@ -10,10 +10,14 @@ class AuthInterceptor(context: Context) : Interceptor {
     private val sessionManager = SessionManager(context.applicationContext)
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val requestBuilder = chain.request().newBuilder()
+        val original = chain.request()
+        val requestBuilder = original.newBuilder()
 
-        sessionManager.fetchAuthToken()?.let {
-            requestBuilder.addHeader("Authorization", "Bearer $it")
+        // A refresh hívás saját Authorization fejlécet küld, azt nem írjuk felül
+        if (original.header("Authorization") == null) {
+            sessionManager.fetchAuthToken()?.let {
+                requestBuilder.addHeader("Authorization", "Bearer $it")
+            }
         }
 
         return chain.proceed(requestBuilder.build())

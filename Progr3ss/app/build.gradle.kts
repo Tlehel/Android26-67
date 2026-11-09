@@ -55,4 +55,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
+    // Képbetöltés URL-ből
+    implementation("io.coil-kt:coil:2.7.0")
 }

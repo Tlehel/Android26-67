@@ -63,6 +63,8 @@ class LoginFragment : Fragment() {
 
                 val session = SessionManager(requireContext().applicationContext)
                 session.saveAuthToken(authResponse.tokens.accessToken)
+                session.saveRefreshToken(authResponse.tokens.refreshToken)
+                session.saveUserId(authResponse.user.id.toLong())
 
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }.onFailure { error ->
