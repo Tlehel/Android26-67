@@ -91,7 +91,7 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun showProfile(profile: Profile) {
-        binding.ivAvatar.loadAvatar(profile.profileImageUrl)
+        binding.ivAvatar.loadAvatar(profile.profileImageBase64, profile.profileImageUrl)
         binding.etEmail.setText(profile.email ?: "")
 
         // A felhasználónév mezőt csak egyszer töltjük ki, hogy a gépelést ne írjuk felül

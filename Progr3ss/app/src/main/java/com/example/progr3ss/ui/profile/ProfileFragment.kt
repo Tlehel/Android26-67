@@ -79,7 +79,7 @@ class ProfileFragment : Fragment() {
     private fun showProfile(profile: Profile) {
         binding.tvUsername.text = profile.username ?: "(no username)"
         binding.tvEmail.text = profile.email ?: ""
-        binding.ivAvatar.loadAvatar(profile.profileImageUrl)
+        binding.ivAvatar.loadAvatar(profile.profileImageBase64, profile.profileImageUrl)
 
         val description = profile.description
         if (description.isNullOrBlank()) {
