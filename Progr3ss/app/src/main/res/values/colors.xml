@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="brown">#b49882</color>
+    <!-- A fő háttérszín, amit kértél -->
+    <color name="brown">#B49882</color>
+
+    <!-- Fő színek (korábban lila): Harmonikus mély erdőzöld árnyalatok -->
+    <color name="purple_200">#A3B899</color> <!-- Világos zsályazöld -->
+    <color name="purple_500">#4A6B53</color> <!-- Normál erdőzöld -->
+    <color name="purple_700">#2C4233</color> <!-- Sötét fenyőzöld -->
+
+    <!-- Kiegészítő színek (korábban türkiz): Meleg terrakotta/rozsda -->
+    <color name="teal_200">#D98A6C</color> <!-- Világos rozsda -->
+    <color name="teal_700">#A65233</color> <!-- Sötét rozsda -->
+
+    <!-- Szöveg és kontraszt színek -->
+    <color name="black">#29211C</color> <!-- Nagyon sötét, meleg kávébarna a durva fekete helyett -->
+    <color name="white">#F5EFE9</color> <!-- Krém/törtfehér szín, ami nem "ég ki" a barna mellett -->
 </resources>
