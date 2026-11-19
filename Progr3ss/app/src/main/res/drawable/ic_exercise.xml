@@ -13,8 +13,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android" android:height="24dp" android:tint="#000000" android:viewportHeight="960" android:viewportWidth="960" android:width="24dp">
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:height="24dp" android:tint="#000000" android:viewportHeight="24" android:viewportWidth="24" android:width="24dp">
       
-    <path android:fillColor="@android:color/white" android:pathData="M320,880Q237,880 178.5,821.5Q120,763 120,680Q120,597 178.5,538.5Q237,480 320,480L320,560Q270,560 235,595Q200,630 200,680Q200,730 235,765Q270,800 320,800Q370,800 405,765Q440,730 440,680L520,680Q520,763 461.5,821.5Q403,880 320,880ZM680,840L680,640Q680,640 680,640Q680,640 680,640L440,640Q396,640 372,602.5Q348,565 366,524L440,360L349,360L325,422L248,400L276,328Q285,305 305.5,292.5Q326,280 350,280L558,280Q603,280 626.5,316.5Q650,353 632,394L566,540L680,540Q713,540 736.5,563.5Q760,587 760,620L760,840L680,840ZM583.5,236.5Q560,213 560,180Q560,147 583.5,123.5Q607,100 640,100Q673,100 696.5,123.5Q720,147 720,180Q720,213 696.5,236.5Q673,260 640,260Q607,260 583.5,236.5Z"/>
+    <path android:fillColor="@android:color/white" android:pathData="M14.5,12c0,1.38 -1.12,2.5 -2.5,2.5c-1.38,0 -2.5,-1.12 -2.5,-2.5s1.12,-2.5 2.5,-2.5C13.38,9.5 14.5,10.62 14.5,12zM22,12c0,5.52 -4.48,10 -10,10C6.48,22 2,17.52 2,12S6.48,2 12,2C17.52,2 22,6.48 22,12zM20,12h-4c0,-2.21 -1.79,-4 -4,-4c-2.21,0 -4,1.79 -4,4H4c0,4.41 3.59,8 8,8C16.41,20 20,16.41 20,12z"/>
     
 </vector>

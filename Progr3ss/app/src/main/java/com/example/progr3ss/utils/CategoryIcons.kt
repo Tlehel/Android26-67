@@ -11,6 +11,7 @@ object CategoryIcons {
         "Hydration" -> R.drawable.ic_hydration
         "Writing" -> R.drawable.ic_writing
         "Running" -> R.drawable.ic_running
+        "Cycling" -> R.drawable.ic_cycling
         "Other" -> R.drawable.ic_other
         else -> R.drawable.ic_add
     }
